@@ -8,31 +8,75 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      counter: 0,
-      columns: {
-        A: ['d','c','b','a'],
-        B: [],
-        C: []
+      clicks: 0,
+      blockGrab: '',
+      parentId: '', 
+      A: ['d', 'c', 'b', 'a'],
+      B: [],
+      C: []  
+    }
+  }
+
+  
+  handleClick = (e) => {
+    if (this.state.clicks %2 === 0) {
+      const targ = e.target;
+      const targId = e.target.id;
+      const parentDiv = targ.parentNode.id;
+      const boardItem = this.state[parentDiv];
+      const grabBlock = boardItem[boardItem.length-1];
+
+      if (targId === grabBlock) {
+        this.setState({blockGrab: grabBlock,
+                      clicks: this.state.clicks +1,
+                      parentId: parentDiv
+                      });
       }
     }
   }
 
-  handleClick = (e) => {
-    const targ = e.target.id;
-    if (this.state.columns.A[this.state.columns.A.length-1] === targ) {
-          console.log('hi');
-    }
-    
+
+  parentClick = (e) => {
+    if (this.state.clicks % 2 === 1) {
+      const targId = e.target.id;
+      const previousArr = this.state.parentId;
+      const newArr = this.state[previousArr];
+      newArr.pop();
+      // why can i mutate state without settingState
+      this.setState({[previousArr]: newArr,
+                     [targId]: [...this.state[targId], this.state.blockGrab],
+                     clicks: this.state.clicks +1,
+                    })
+      this.winState();              
+      }
+
   }
+
+  winState = () => {
+    if(this.state.C.length === 3) {
+      alert('Winner Winner.');
+      this.setState({clicks: 0,
+                     blockGrab: '',
+                     parentId: '', 
+                     A: ['d', 'c', 'b', 'a'],
+                     C: []  
+      })
+    } 
+  }
+    // return this.state.clicks % 2 === 0 && objValues.includes(targ);
+    // else if(this.state.clicks % 2 === 1 &&  divOptions.includes(targ)) {
+    //   this.setState({clicks: click + 1});      
+    // }
+
 
   render() {
     return (
       <div className="App">
-        <div onClick={this.handleClick}> counter: {this.state.counter}</div>
+        <div id="counter"> counter: {this.state.clicks}</div>
         <div id="columnView">
-          <ColumnA block={this.state.columns.A} click={this.handleClick} />
-          <ColumnB block={this.state.columns.B}/>
-          <ColumnC block={this.state.columns.C}/>
+          <ColumnA block={this.state.A} click={this.handleClick} parentClick ={this.parentClick} />
+          <ColumnB block={this.state.B} click={this.handleClick} parentClick ={this.parentClick} />
+          <ColumnC block={this.state.C} click={this.handleClick} parentClick ={this.parentClick} />
         </div>
       </div>
     );

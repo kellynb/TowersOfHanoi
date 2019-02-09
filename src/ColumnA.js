@@ -3,9 +3,8 @@ import './App.css';
 
 const ColumnA =(props) => {
     const blockArr = props.block;
-    console.log(props.click);
     return (
-        <div className="Column1">
+        <div className="Column1" id='A' onClick={props.parentClick}>
             {blockArr.length > 0 
                 ? blockArr.map(block => <div id={block} key={block} onClick={props.click}></div>)
                 : null 
