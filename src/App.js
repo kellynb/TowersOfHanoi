@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import ColumnA from './ColumnA';
-import ColumnB from './ColumnB';
-import ColumnC from './ColumnC';
+import ColumnA from './Components/ColumnA';
+import ColumnB from './Components/ColumnB';
+import ColumnC from './Components/ColumnC';
+import Counter from './Components/Counter';
+import ValidMove from './GamePlay/ValidMove';
 
 class App extends Component {
   constructor(props) {
@@ -10,7 +12,8 @@ class App extends Component {
     this.state = {
       clicks: 0,
       blockGrab: '',
-      parentId: '', 
+      parentId: '',
+      divVal: '', 
       A: ['d', 'c', 'b', 'a'],
       B: [],
       C: []  
@@ -29,7 +32,8 @@ class App extends Component {
       if (targId === grabBlock) {
         this.setState({blockGrab: grabBlock,
                       clicks: this.state.clicks +1,
-                      parentId: parentDiv
+                      parentId: parentDiv,
+                      divVal: targId
                       });
       }
     }
@@ -38,45 +42,40 @@ class App extends Component {
 
   parentClick = (e) => {
     if (this.state.clicks % 2 === 1) {
-      const targId = e.target.id;
-      const previousArr = this.state.parentId;
-      const newArr = this.state[previousArr];
-      newArr.pop();
-      // why can i mutate state without settingState
-      this.setState({[previousArr]: newArr,
-                     [targId]: [...this.state[targId], this.state.blockGrab],
-                     clicks: this.state.clicks +1,
-                    })
-      this.winState();              
+      if (ValidMove(e, this)) {
+        const targId = e.target.id;
+        const targParent = e.currentTarget.id;
+        const previousArr = this.state.parentId;
+        const newArr = this.state[previousArr];
+        if (targParent !== previousArr) {
+          newArr.pop();
+          // why can i mutate state without settingState
+          this.setState({[previousArr]: newArr,
+                        [targId]: [...this.state[targId], this.state.blockGrab],
+                        clicks: this.state.clicks +1,
+                        })             
+          }
+      } else {
+        this.setState({
+            blockGrab: "",
+            clicks: this.state.clicks-1,
+            parentId: "",
+            divVal: ""
+        })
       }
-
+    }   
   }
-
-  winState = () => {
-    if(this.state.C.length === 3) {
-      alert('Winner Winner.');
-      this.setState({clicks: 0,
-                     blockGrab: '',
-                     parentId: '', 
-                     A: ['d', 'c', 'b', 'a'],
-                     C: []  
-      })
-    } 
-  }
-    // return this.state.clicks % 2 === 0 && objValues.includes(targ);
-    // else if(this.state.clicks % 2 === 1 &&  divOptions.includes(targ)) {
-    //   this.setState({clicks: click + 1});      
-    // }
 
 
   render() {
     return (
       <div className="App">
-        <div id="counter"> counter: {this.state.clicks}</div>
+        <Counter count={Math.floor(this.state.clicks/2)} />
         <div id="columnView">
           <ColumnA block={this.state.A} click={this.handleClick} parentClick ={this.parentClick} />
           <ColumnB block={this.state.B} click={this.handleClick} parentClick ={this.parentClick} />
-          <ColumnC block={this.state.C} click={this.handleClick} parentClick ={this.parentClick} />
+          <ColumnC block={this.state.C} click={this.handleClick} parentClick ={this.parentClick} 
+                   win={this} count={Math.floor(this.state.clicks/2)} />
         </div>
       </div>
     );
