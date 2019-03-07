@@ -1,6 +1,7 @@
 import React from 'react';
 import '../App.css';
-import WinState from '../GamePlay/WinState';
+import  PostNewScore from '../Functions/PostNewScore';
+import WinState from '../Functions/WinState';
 
 const ColumnC =(props) => {
     const blockArr = props.block;
@@ -9,7 +10,8 @@ const ColumnC =(props) => {
     if (blockArr.length > 0 && blockArr.length < 4) {
         blocks = blockArr.map((block, index) => <div id={block} key={block} data-index={index} onClick={props.click}></div>)
     } else if (blockArr.length === 4) {
-        WinState(props.win, props.count)
+        WinState(props.win, props.count);
+        PostNewScore(props.win);
     } else {
         blocks = null
     }

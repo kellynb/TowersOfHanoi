@@ -3,7 +3,7 @@ import '../App.css';
 
 const Counter = (props) => {
     return (
-        <div id="counter"> Moves: {props.count}</div>
+        <div id="counter"> Current Score: {props.count}</div>
     )
 }
 

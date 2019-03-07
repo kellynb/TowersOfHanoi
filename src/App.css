@@ -12,8 +12,93 @@
   color: white;
 }
 
+#title {
+  display: flex;
+  flex-direction: column;
+  background-color:  rgb(178, 32, 154);
+  width: 100%;
+  height: auto;
+  align-items: center;
+  justify-content: space-around;
+  font-family: 'Bungee', cursive;
+}
+
+h1 {
+  font-size: 50px;
+  text-align: justify;
+  margin-bottom: -15px;
+  margin-top: 0;
+}
+
+
+#gameData {
+  width: 75vw;
+  height: 20vh;
+  /* background-color: green; */
+}
+
+h2 {
+  font-size: 25px;
+  font-family:'Bungee Shade', cursive;
+  letter-spacing: 4px;
+  color: whitesmoke
+}
+
+#scoreBoard {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border: 2px solid white;
+  border-radius: 5px;
+  width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#counter {
+  font-weight: 400;
+	font-size: 18px;
+}
+
+#highscore {
+  font-weight: 400;
+	font-size: 18px;
+}
+
+#instructions {
+  font-weight: 400;
+  font-size: 12px;
+  float: right;
+  position: relative;
+  margin-top: -120px;
+  color: white;
+  z-index: 3;
+  width: 290px;
+  border: 2px white solid;
+  border-radius: 5px;
+  background-color: #282c34;
+
+}
+
+.close {
+  float: left;
+}
+
+ol {
+  text-align: left;
+}
+
+button {
+  font-size: 20px;
+  font-weight: 400;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  border: none;
+	background-color: transparent;
+	cursor: pointer;
+}
+
 #columnView {
-  margin-top: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -26,32 +111,38 @@
   flex-direction: column-reverse;
   align-items: center;
   background-color: black;
-  width: 150px;
-  height: 125px
+  width: 200px;
+  height: 400px
 }
 
 #a {
-  height: 25px;
-  width: 50px;
+  height: 50px;
+  width: 100px;
   background-color: lightseagreen;
+  border-radius: 15px;
+  box-shadow: 1px 1px 1px 1px rgb(49, 47, 47);
 }
 
 #b {
-  height: 25px;
-  width: 75px;
+  height: 50px;
+  width: 125px;
   background-color: rgb(32, 66, 178);
+  border-radius: 15px;
+  box-shadow: 1px 1px 1px 1px rgb(49, 47, 47);
 }
 
 #c {
-  height: 25px;
-  width: 100px;
+  height: 50px;
+  width: 150px;
   background-color: rgb(120, 32, 178);
+  border-radius: 15px
 }
 
 #d {
-  height: 25px;
-  width: 125px;
+  height: 50px;
+  width: 175px;
   background-color: rgb(178, 32, 134);
+  border-radius: 15px
 }
 
 

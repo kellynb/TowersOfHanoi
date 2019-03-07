@@ -4,16 +4,27 @@ import ColumnA from './Components/ColumnA';
 import ColumnB from './Components/ColumnB';
 import ColumnC from './Components/ColumnC';
 import Counter from './Components/Counter';
-import ValidMove from './GamePlay/ValidMove';
+import ValidMove from './Functions/ValidMove';
+import HighScore from './Components/HighScore';
+import InstructButton from './Components/InstructButton';
+import Instructions from './Components/Instructions';
+import StartForm from './Components/StartForm';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      login: true,
+      value: "",
+      name: "",
+      match: "",
+      player: "",
+      score: "",
       clicks: 0,
       blockGrab: '',
       parentId: '',
-      divVal: '', 
+      divVal: '',
+      instructions: false, 
       A: ['d', 'c', 'b', 'a'],
       B: [],
       C: []  
@@ -49,7 +60,6 @@ class App extends Component {
         const newArr = this.state[previousArr];
         if (targParent !== previousArr) {
           newArr.pop();
-          // why can i mutate state without settingState
           this.setState({[previousArr]: newArr,
                         [targId]: [...this.state[targId], this.state.blockGrab],
                         clicks: this.state.clicks +1,
@@ -70,7 +80,19 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Counter count={Math.floor(this.state.clicks/2)} />
+        {this.state.login ? <StartForm state={this} /> : null}
+        <section id="title">
+          <h1>TOWERS OF HANOI</h1>
+        </section>
+        <section id ="gameData">
+          <h2>Give it your best {this.state.player}</h2>
+          <div id="scoreBoard">
+            <Counter count={Math.floor(this.state.clicks/2)} />
+            <HighScore score={this.state.score}/>
+            <InstructButton state={this} />
+          </div>
+          <Instructions state={this} />
+        </section>
         <div id="columnView">
           <ColumnA block={this.state.A} click={this.handleClick} parentClick ={this.parentClick} />
           <ColumnB block={this.state.B} click={this.handleClick} parentClick ={this.parentClick} />

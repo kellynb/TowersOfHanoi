@@ -1,5 +1,5 @@
 
-  const ValidMove = (val, props) => {
+const ValidMove = (val, props) => {
     const parentTarg = val.target.id;
     if (parentTarg === "A" || parentTarg === "B" || parentTarg === "C") {
         const childNodes = val.target.childNodes;
@@ -11,6 +11,6 @@
        }
     }    
     
-  }
+}
 
   export default ValidMove;
