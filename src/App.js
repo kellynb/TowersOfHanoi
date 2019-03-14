@@ -80,7 +80,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.login ? <StartForm state={this} /> : null}
+        {this.state.login ? <StartForm state={this}/> : null}
         <section id="title">
           <h1>TOWERS OF HANOI</h1>
         </section>

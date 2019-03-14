@@ -54,12 +54,12 @@ const StartForm = (props) => {
     }
 
     return (
-        <div>
+        <div id="login">
             <form onSubmit={handleSubmit}>
-                <label>Nickname: 
-                    <input type="text" value={props.state.state.value} onChange={handleChange} />
+                <label>Name : 
+                    <input id="formtext" type="text" value={props.state.state.value} onChange={handleChange} />
                 </label>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Submit"/>
             </form>
             <MatchOptions state={props.state}/>
         </div>

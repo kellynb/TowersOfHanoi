@@ -11,9 +11,9 @@ const MatchOptions = (props) => {
 
     if (props.state.state.match) {
         theMatch = 
-        <div>
+        <div id='match'>
             <p> Hello {props.state.state.match}. To continue as this player press continue, else enter a new user name</p>
-            <button onClick={handleClick}>Continue</button>
+            <button onClick={handleClick} id='playerbutton'>Continue</button>
         </div>
     }
     return (
