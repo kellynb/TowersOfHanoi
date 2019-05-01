@@ -16,8 +16,8 @@ exports.create = function create(request, response) {
 }
 
 exports.update = function update(request, response) {
-    const name = request.query.name;
-    const score = request.query.score;
+    const name = request.body.player;
+    const score = request.body.score;
     User.findOneAndUpdate({name: name}, {$push:{score: score}}, {new:true, projection: {score}}, (err, users) => {
         if (err) return console.error(err);
         const allScores = users.score;

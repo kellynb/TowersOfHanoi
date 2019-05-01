@@ -15,6 +15,7 @@ class App extends Component {
     super(props);
     this.state = {
       login: true,
+      bigHover: false,
       value: "",
       name: "",
       match: "",
@@ -34,6 +35,7 @@ class App extends Component {
   
   handleClick = (e) => {
     if (this.state.clicks %2 === 0) {
+      this.setState({bigHover: !this.state.bigHover});
       const targ = e.target;
       const targId = e.target.id;
       const parentDiv = targ.parentNode.id;
@@ -76,8 +78,38 @@ class App extends Component {
     }   
   }
 
+  winState = () => {
+    this.setState({ 
+      clicks: 0,
+      blockGrab: '',
+      parentId: '', 
+      A: ['d', 'c', 'b', 'a'],
+      B: [],
+      C: []
+    })  
+  }
+
+  postNewScore = () => {
+    const playerScore = {
+      player: this.state.player,
+      score: Math.floor(this.state.clicks/2)
+    };
+
+    fetch(`/${this.state.name}/${this.state.score}`, {
+        headers: {
+                'content-type': 'application/json'
+                },
+        method: 'POST',
+        body: JSON.stringify(playerScore)
+      })  
+        .then(data => data.json())
+        .then(res => {
+           this.setState({score: res}); 
+      })
+  }
 
   render() {
+
     return (
       <div className="App">
         {this.state.login ? <StartForm state={this}/> : null}
@@ -97,7 +129,7 @@ class App extends Component {
           <ColumnA block={this.state.A} click={this.handleClick} parentClick ={this.parentClick} />
           <ColumnB block={this.state.B} click={this.handleClick} parentClick ={this.parentClick} />
           <ColumnC block={this.state.C} click={this.handleClick} parentClick ={this.parentClick} 
-                   win={this} count={Math.floor(this.state.clicks/2)} />
+                   win={() => this.winState()} count={Math.floor(this.state.clicks/2)} postNewScore={() => this.postNewScore()} />
         </div>
       </div>
     );

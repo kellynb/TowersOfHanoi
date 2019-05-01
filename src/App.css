@@ -3,7 +3,7 @@
 .App {
   text-align: center;
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 120vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,6 +27,7 @@
 
 #login {
   background-color: white;
+  position: relative;
   width: 600px;
   min-height: 150px;
   z-index: 2;
@@ -74,8 +75,9 @@ h1 {
 
 #gameData {
   width: 75vw;
-  height: 20vh;
-  /* background-color: green; */
+  height: auto;
+  position: relative;
+  top: 5px;
 }
 
 h2 {
@@ -145,6 +147,8 @@ button {
   justify-content: space-around;
   width: 75vw;
   background-color: blueviolet;
+  position: relative;
+  top: 50px;
 }
 
 .Column1 {
