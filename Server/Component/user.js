@@ -1,7 +1,7 @@
 const User = require('../Model/userModel');
 
 exports.list=  function list(request, response) {
-    const name =request.query;
+    const name = request.params
     User.find(name, (err,users) => {
         if (err) return console.error(err);
         return response.json(users);

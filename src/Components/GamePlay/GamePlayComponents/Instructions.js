@@ -1,18 +1,14 @@
 import React from 'react';
-import '../App.css';
+import '../../../App.css';
 
 const Instructions = (props) => {
 
-    const handleInstructions = () => {
-        props.state.setState({instructions: !props.state.state.instructions})
-    }
-
     let view = null;
 
-    if (props.state.state.instructions) {
+    if (props.instructions) {
         view = 
         <section id="instructions">
-            <button type="button" className="close" aria-label="Close" onClick={handleInstructions}>
+            <button type="button" className="close" aria-label="Close" onClick={props.handleInstructions}>
                 <span aria-hidden="true">×</span>
             </button>
             <ol>

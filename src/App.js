@@ -1,38 +1,94 @@
 import React, { Component } from 'react';
 import './App.css';
-import ColumnA from './Components/ColumnA';
-import ColumnB from './Components/ColumnB';
-import ColumnC from './Components/ColumnC';
-import Counter from './Components/Counter';
+import Gameplay from './Components/GamePlay/GamePlay'
 import ValidMove from './Functions/ValidMove';
-import HighScore from './Components/HighScore';
-import InstructButton from './Components/InstructButton';
-import Instructions from './Components/Instructions';
-import StartForm from './Components/StartForm';
+import StartForm from './Components/StartForm/StartForm';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      login: true,
-      bigHover: false,
+      login: false,
       value: "",
-      name: "",
-      match: "",
+      match: false,
       player: "",
       score: "",
       clicks: 0,
       blockGrab: '',
       parentId: '',
       divVal: '',
-      instructions: false, 
       A: ['d', 'c', 'b', 'a'],
       B: [],
       C: []  
     }
   }
 
-  
+  handleChange = (e) => {
+    this.setState({value: e.target.value});
+  }
+
+  handleSubmit = (e) => {
+    this.setState({
+      player: this.state.value,
+      value: ""
+      }, () => {
+        if(this.state.player) {
+          this.getData();
+        };
+    })
+    e.preventDefault();
+  }
+
+  getData = () => {
+    fetch(`/${this.state.player}`, {
+      headers: {
+              'content-type': 'application/json'
+              },
+      method: 'GET'
+    })
+      .then(data => data.json())
+      .then(res => {
+          const returnName = res[0];
+          if (returnName) {
+            if (returnName.score) {
+              const allScores = returnName.score;
+              allScores.sort((a,b) => a-b);
+              this.setState({
+                score: allScores[0]
+              })
+            }
+            this.setState({
+              match: true
+            })
+          } else {
+            this.createUser();
+          }
+      })
+  }
+
+  createUser = () => {
+    const player = this.state.player;
+    
+    const name = {name : player};
+    fetch(`/${player}`, {
+      headers: {
+              'content-type': 'application/json'
+              },
+      method: 'POST',
+      body: JSON.stringify(name)
+    })
+      .then( () => {
+          return this.setState({
+            login: true,
+            score: ""
+          })
+    })
+  }
+
+  handleMatch = () => {
+    this.setState({login: true})
+  }
+
   handleClick = (e) => {
     if (this.state.clicks %2 === 0) {
       this.setState({bigHover: !this.state.bigHover});
@@ -51,7 +107,6 @@ class App extends Component {
       }
     }
   }
-
 
   parentClick = (e) => {
     if (this.state.clicks % 2 === 1) {
@@ -99,7 +154,7 @@ class App extends Component {
         headers: {
                 'content-type': 'application/json'
                 },
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify(playerScore)
       })  
         .then(data => data.json())
@@ -112,25 +167,32 @@ class App extends Component {
 
     return (
       <div className="App">
-        {this.state.login ? <StartForm state={this}/> : null}
+        {!this.state.login ? 
+          <StartForm 
+            match={this.state.match} 
+            handleMatch={this.handleMatch} 
+            handleChange={this.handleChange} 
+            handleSubmit={this.handleSubmit} 
+            value={this.state.value}
+            player={this.state.player} 
+          /> 
+        : null}
         <section id="title">
           <h1>TOWERS OF HANOI</h1>
         </section>
-        <section id ="gameData">
-          <h2>Give it your best {this.state.player}</h2>
-          <div id="scoreBoard">
-            <Counter count={Math.floor(this.state.clicks/2)} />
-            <HighScore score={this.state.score}/>
-            <InstructButton state={this} />
-          </div>
-          <Instructions state={this} />
-        </section>
-        <div id="columnView">
-          <ColumnA block={this.state.A} click={this.handleClick} parentClick ={this.parentClick} />
-          <ColumnB block={this.state.B} click={this.handleClick} parentClick ={this.parentClick} />
-          <ColumnC block={this.state.C} click={this.handleClick} parentClick ={this.parentClick} 
-                   win={() => this.winState()} count={Math.floor(this.state.clicks/2)} postNewScore={() => this.postNewScore()} />
-        </div>
+        {this.state.login ? 
+          <Gameplay
+            player= {this.state.player}
+            score = {this.state.score}
+            clicks = {this.state.clicks}
+            postNewScore={() => this.postNewScore()}
+            winState = {() => this.winState()}
+            parentClick = {(e) => this.parentClick(e)}
+            handleClick= {(e) => this.handleClick(e)}
+            A = {this.state.A} 
+            B = {this.state.B}
+            C = {this.state.C}
+             /> : null}
       </div>
     );
   }
