@@ -150,7 +150,7 @@ class App extends Component {
       score: Math.floor(this.state.clicks/2)
     };
 
-    fetch(`/${this.state.name}/${this.state.score}`, {
+    fetch(`/${this.state.player}/${Math.floor(this.state.clicks/2)}`, {
         headers: {
                 'content-type': 'application/json'
                 },
@@ -164,7 +164,9 @@ class App extends Component {
   }
 
   render() {
-
+    const getKeys = Object.keys(this.state);
+    const columnKeys = getKeys.slice(9,getKeys.length)
+    
     return (
       <div className="App">
         {!this.state.login ? 
@@ -182,6 +184,7 @@ class App extends Component {
         </section>
         {this.state.login ? 
           <Gameplay
+            keys={columnKeys}
             player= {this.state.player}
             score = {this.state.score}
             clicks = {this.state.clicks}

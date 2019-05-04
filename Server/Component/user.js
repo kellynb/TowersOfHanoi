@@ -19,10 +19,10 @@ exports.update = function update(request, response) {
     const name = request.body.player;
     const score = request.body.score;
     User.findOneAndUpdate({name: name}, {$push:{score: score}}, {new:true, projection: {score}}, (err, users) => {
-        if (err) return console.error(err);
-        const allScores = users.score;
-        allScores.sort((a,b) => a-b)
-        const bestScore = allScores[0];
-        return response.json(bestScore);
+            if (err) return console.error(err);
+            const allScores = users.score;
+            allScores.sort((a,b) => a-b)
+            const bestScore = allScores[0];
+            return response.json(bestScore);
         })
 }
