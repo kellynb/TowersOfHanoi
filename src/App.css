@@ -75,9 +75,9 @@ h1 {
 
 #gameData {
   width: 75vw;
-  height: auto;
-  position: relative;
-  top: 5px;
+  height: 80px;
+  margin-top: -50px;
+ 
 }
 
 h2 {

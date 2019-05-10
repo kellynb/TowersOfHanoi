@@ -3,8 +3,11 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
 const all = require('./Routes/all');
-const cors = require('cors')
-mongoose.connect('mongodb://jello:a9bc839993@ds157895.mlab.com:57895/towers', {useNewUrlParser: true});
+const cors = require('cors');
+const dotenv = require("dotenv");
+dotenv.config();
+
+mongoose.connect(process.env.mongodburi, {useNewUrlParser: true});
 
 app.use(bodyParser.json());
 app.use(cors());

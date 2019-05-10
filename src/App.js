@@ -91,7 +91,6 @@ class App extends Component {
 
   handleClick = (e) => {
     if (this.state.clicks %2 === 0) {
-      this.setState({bigHover: !this.state.bigHover});
       const targ = e.target;
       const targId = e.target.id;
       const parentDiv = targ.parentNode.id;
@@ -100,7 +99,7 @@ class App extends Component {
 
       if (targId === grabBlock) {
         this.setState({blockGrab: grabBlock,
-                      clicks: this.state.clicks +1,
+                       clicks: this.state.clicks+1,
                       parentId: parentDiv,
                       divVal: targId
                       });
