@@ -99,7 +99,7 @@ class App extends Component {
 
       if (targId === grabBlock) {
         this.setState({blockGrab: grabBlock,
-                       clicks: this.state.clicks+1,
+                      clicks: this.state.clicks+1,
                       parentId: parentDiv,
                       divVal: targId
                       });
