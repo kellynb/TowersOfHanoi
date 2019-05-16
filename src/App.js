@@ -19,7 +19,8 @@ class App extends Component {
       divVal: '',
       A: ['d', 'c', 'b', 'a'],
       B: [],
-      C: []  
+      C: [],
+      D: []  
     }
   }
 
@@ -78,7 +79,7 @@ class App extends Component {
       body: JSON.stringify(name)
     })
       .then( () => {
-          return this.setState({
+          this.setState({
             login: true,
             score: ""
           })
@@ -139,7 +140,8 @@ class App extends Component {
       parentId: '', 
       A: ['d', 'c', 'b', 'a'],
       B: [],
-      C: []
+      C: [],
+      D: []
     })  
   }
 
@@ -193,6 +195,7 @@ class App extends Component {
             A = {this.state.A} 
             B = {this.state.B}
             C = {this.state.C}
+            D = {this.state.D}
         />}
       </div>
     );

@@ -1,7 +1,7 @@
 
 const ValidMove = (val, props) => {
     const parentTarg = val.target.id;
-    if (parentTarg === "A" || parentTarg === "B" || parentTarg === "C") {
+     if (parentTarg) {
         const childNodes = val.target.childNodes;
       if(childNodes.length !== 0) {
         const childVal = val.target.lastChild.id;
