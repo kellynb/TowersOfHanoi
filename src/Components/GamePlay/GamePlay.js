@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import Column from './GamePlayComponents/Column';
-import WinColumn from './GamePlayComponents/WinColumn';
 import Counter from './GamePlayComponents/Counter';
 import HighScore from './GamePlayComponents/HighScore';
 import InstructButton from './GamePlayComponents/InstructButton';
@@ -17,6 +16,7 @@ class GamePlay extends Component {
     }
 
     render () {
+        const winColumn = this.props.keys[this.props.keys.length-1];
         return (
             <div> 
                 <section id ="gameData">
@@ -29,29 +29,22 @@ class GamePlay extends Component {
                     <Instructions handleInstructions={this.handleInstructions} instructions={this.state.instructions} />
                 </section>
                 <div id="columnView">
-                    <Column 
-                        id = {this.props.keys[0]}
-                        block={this.props.A} 
-                        click={this.props.handleClick} 
-                        parentClick ={this.props.parentClick} 
-                        clicks={this.props.clicks}
-                        />
-                    <Column
-                        id = {this.props.keys[1]}
-                        block={this.props.B} 
-                        click={this.props.handleClick} 
-                        parentClick ={this.props.parentClick}
-                        clicks={this.props.clicks}
-                         />
-                    <WinColumn 
-                        block={this.props.C} 
-                        click={this.props.handleClick} 
-                        parentClick ={this.props.parentClick}
-                        clicks={this.props.clicks} 
-                        win={this.props.winState} 
-                        postNewScore = {this.props.postNewScore}
-                        count={Math.floor(this.props.clicks/2)} 
-                    />
+                    {this.props.keys.map((column, index) => {
+                        return (
+                            <Column 
+                                id ={column}
+                                key ={index}
+                                block={this.props[column]} 
+                                click={this.props.handleClick} 
+                                parentClick ={this.props.parentClick} 
+                                clicks={this.props.clicks}
+                                winColumn ={winColumn}
+                                win={this.props.winState} 
+                                postNewScore = {this.props.postNewScore}
+                                count={Math.floor(this.props.clicks/2)} 
+                            />
+                        )
+                    })}
                 </div>
             </div>
         )

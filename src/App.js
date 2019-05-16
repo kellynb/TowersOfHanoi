@@ -168,6 +168,9 @@ class App extends Component {
     
     return (
       <div className="App">
+        <section id="title">
+          <h1>TOWERS OF HANOI</h1>
+        </section>
         {!this.state.login ? 
           <StartForm 
             match={this.state.match} 
@@ -177,24 +180,20 @@ class App extends Component {
             value={this.state.value}
             player={this.state.player} 
           /> 
-        : null}
-        <section id="title">
-          <h1>TOWERS OF HANOI</h1>
-        </section>
-        {this.state.login ? 
+          : 
           <Gameplay
             keys={columnKeys}
             player= {this.state.player}
             score = {this.state.score}
             clicks = {this.state.clicks}
-            postNewScore={() => this.postNewScore()}
-            winState = {() => this.winState()}
-            parentClick = {(e) => this.parentClick(e)}
-            handleClick= {(e) => this.handleClick(e)}
+            postNewScore={this.postNewScore}
+            winState = {this.winState}
+            parentClick = {this.parentClick}
+            handleClick= {this.handleClick}
             A = {this.state.A} 
             B = {this.state.B}
             C = {this.state.C}
-             /> : null}
+        />}
       </div>
     );
   }
