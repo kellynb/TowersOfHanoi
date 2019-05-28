@@ -19,8 +19,7 @@ class App extends Component {
       divVal: '',
       A: ['d', 'c', 'b', 'a'],
       B: [],
-      C: [],
-      D: []  
+      C: [] 
     }
   }
 
@@ -140,8 +139,7 @@ class App extends Component {
       parentId: '', 
       A: ['d', 'c', 'b', 'a'],
       B: [],
-      C: [],
-      D: []
+      C: []
     })  
   }
 
