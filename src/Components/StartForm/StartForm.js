@@ -8,7 +8,8 @@ const StartForm = (props) => {
     return (
             <div id="login">
                 <form onSubmit={props.handleSubmit}>
-                    <label>Name : 
+                    <label>
+                        Name :
                         <input id="formtext" type="text" value={props.value} onChange={props.handleChange} />
                     </label>
                     <input type="submit" value="Submit"/>

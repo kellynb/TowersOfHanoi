@@ -212,6 +212,14 @@ label {
 }
 
 @media (max-width: 600px) {
+  #login {
+    width: 350px;
+  }
+
+  #formtext {
+    width: 100px;
+  }
+
   h1 {
     font-size: 48px;
     text-align: center;
@@ -235,6 +243,14 @@ label {
 
   #columnView {
     margin-top: 250px;
+  }
+
+  #login {
+    width: 275px;
+  }
+
+  #formtext {
+    width: 75px;
   }
 
 }
