@@ -67,14 +67,14 @@ input[type=submit]:hover, #playerbutton:hover {
 h1 {
   font-size: 50px;
   text-align: justify;
-  margin-bottom: -15px;
-  margin-top: 0;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 
 #gameData {
   width: 75vw;
-  height: 80px;
+  height: auto;
 }
 
 h2 {
@@ -144,7 +144,7 @@ button {
   justify-content: space-around;
   width: 75vw;
   background-color: blueviolet;
-  margin-top: 110px;
+  margin-top: 30px;
   margin-bottom: 30px;
 }
 
@@ -233,20 +233,12 @@ label {
     height: auto;
   }
 
-  #columnView {
-    margin-top: 200px;
-  }
-
 }
 
 @media (max-width: 350px) {
 
-  #columnView {
-    margin-top: 250px;
-  }
-
   #login {
-    width: 275px;
+    width: 300px;
   }
 
   #formtext {

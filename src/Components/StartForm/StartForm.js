@@ -9,8 +9,8 @@ const StartForm = (props) => {
             <div id="login">
                 <form onSubmit={props.handleSubmit}>
                     <label>
-                        Name :
-                        <input id="formtext" type="text" value={props.value} onChange={props.handleChange} />
+                        <span>Name:</span>
+                        <input name="Name" id="formtext" type="text" value={props.value} onChange={props.handleChange} />
                     </label>
                     <input type="submit" value="Submit"/>
                 </form>
