@@ -9,12 +9,12 @@ const Instructions = (props) => {
                     <button type="button" className="close" aria-label="Close" onClick={props.handleInstructions}>
                         <span aria-hidden="true">×</span>
                     </button>
+                    <p id="purpose">The purpose of the game is to move all blocks from the far left column to the far right column</p>
                     <ol>
-                        <li> Click on a block to select block</li>
-                        <li> Then click on a column to move block</li>
-                        <li> Block will only move if its smaller than the block it stacks on top</li>
-                        <li> If you click the same column the block is in, you restart the move</li>
-                        <li> Get all blocks in the far right column. Try to do so in the least amount of moves</li>
+                        <li> Click on a block to select the block</li>
+                        <li> Then select the column to where you want to move the block</li>
+                        <li> The block will only move if its smaller than the block it stacks on top of</li>
+                        <li> If you select the same column the block is in, your move is not counted</li>
                     </ol>
                 </section>
                 :
